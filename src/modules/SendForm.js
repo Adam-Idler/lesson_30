@@ -37,10 +37,12 @@ class SendForm {
               throw new Error('status network not 200');
             }
             statusMessage.textContent = this.successMessage;
+            setTimeout(() => statusMessage.remove(), 3000);
           })
           .catch(error => {
             statusMessage.textContent = this.errorMessage;
             console.error(error);
+            setTimeout(() => statusMessage.remove(), 3000);
           });
         form.reset();
     });
