@@ -12,7 +12,7 @@
   import SendForm from './modules/SendForm';
   
   // Timer
-  const timer = new Timer('31 dec 2020');
+  const timer = new Timer('15 Jan 2021');
   timer.countTimer();
 
   // Menu
@@ -46,7 +46,6 @@
   // Calculator
   const calcutor = new Calculator(100);
   calcutor.calc();
-
   //send-ajax-form
   const sendForm = new SendForm();
   sendForm.sendAjax();

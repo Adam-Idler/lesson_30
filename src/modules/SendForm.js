@@ -25,6 +25,8 @@ class SendForm {
       form.addEventListener('submit', (event) => {
         event.preventDefault();    
         form.appendChild(statusMessage);
+        const formPhone = form.querySelector('.form-phone');
+        formPhone.value = formPhone.value.replace(/\D/g, '');
         statusMessage.textContent = this.loadMessage;
         const formData = new FormData(form);
         let body = {};

@@ -1,7 +1,12 @@
 function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 	const elems = document.querySelectorAll(selector);
-
+	
 	function mask(event) {
+		for (const elem of elems) {
+			elem.removeEventListener("input", mask);
+			elem.removeEventListener("focus", mask);
+			elem.removeEventListener("blur", mask);
+		}
 		const keyCode = event.keyCode;
 		const template = masked,
 			def = template.replace(/\D/g, ""),
@@ -25,7 +30,6 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 		if (event.type == "blur" && this.value.length < 8) {
 			this.value = "";
 		}
-
 	}
 	for (const elem of elems) {
 		elem.addEventListener("input", mask);

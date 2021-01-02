@@ -12,7 +12,7 @@ class Slider {
       dot.classList.add('dot');
     }
     const dots = dotUl.querySelectorAll('.dot');
-    
+    dots[0].classList.add('dot-active');
     let currentSlide = 0,
         interval;
     const prevSlide = (elem, index, strClass) => elem[index].classList.remove(strClass);

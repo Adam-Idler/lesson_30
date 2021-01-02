@@ -9,8 +9,9 @@ class Calculator {
           calcDay = document.querySelector('.calc-day'),
           calcCount = document.querySelector('.calc-count'),
           totalValue = document.getElementById('total');
-          
+    
     const countSum = () => {
+      
       let total = 0,
           countValue = 1,
           dayValue = 1;
@@ -20,36 +21,36 @@ class Calculator {
       if (calcCount.value > 1) {
         countValue += (calcCount.value - 1) / 10;
       }
-
       if (calcDay.value && calcDay.value < 5) {
         dayValue *= 2;
       } else if (calcDay.value && calcDay.value < 10) {
         dayValue *= 1.5;
       }
-
       if (typeValue && squareValue) {
         total = Math.ceil(this.price * typeValue * squareValue * countValue * dayValue);
       }
+      
       let count = +totalValue.textContent;
       let setID;
-      const bruteForceNumbers = () => {
-        if (total === 0) {
-          totalValue.textContent = 0;
-          clearInterval(setID);
-        } else if (count < total) {
-          count += 100;
-          totalValue.textContent = count;
-        } else if (count > total) {
-          count -= 100;
-          totalValue.textContent = count;
-        }
-        if (total - totalValue.textContent < 150 && total - totalValue.textContent > 0) {
-          totalValue.textContent = total;
-          clearInterval(setID);
-        }
-        
-      };
-      setID = setInterval(bruteForceNumbers, 5);
+      // Animation 
+      if (total === 0) {
+        totalValue.textContent = 0;
+        cancelAnimationFrame(setID);
+      } else if (count < total) {
+        count += Math.floor(total / 25);
+        totalValue.textContent = count;
+      } else if (count > total) {
+        count -= Math.floor(count / 10);
+        totalValue.textContent = count;
+      }
+      
+      if (total - totalValue.textContent < total / 10 && total - totalValue.textContent > 0) {
+        totalValue.textContent = total;
+        cancelAnimationFrame(setID);
+      }
+      
+      setID = requestAnimationFrame(countSum);
+      if (count === total) cancelAnimationFrame(setID);       
     };
 
     calcBlock.addEventListener('change', (event) => {

@@ -6,7 +6,7 @@ class Validate {
   init() {
     this.validateCalc();
     this.validateInputText();
-    maskPhone('.form-phone', '____ ___-__-__');
+    
     document.querySelectorAll('.form-email').forEach((elem) => elem.setAttribute('required', true));
     document.querySelector('.mess').setAttribute('required', true);
     document.querySelectorAll('.form-name').forEach(elem => {
@@ -35,6 +35,11 @@ class Validate {
         }
         if (target.classList.contains('mess')) {
           target.value = target.value.replace(/[a-z]/i, '');
+        }
+        if (target.classList.contains('form-phone')) {
+          if (target.value[1] === '7' || target.value[0] === '7' ) maskPhone('.form-phone', '+_ (___) ___-__-__');
+          else if (target.value[0] === '8') maskPhone('.form-phone', '_ (___) ___-__-__');
+          else if (target.value[0] === '2') maskPhone('.form-phone', '___-__-__');
         }
       });
     });
